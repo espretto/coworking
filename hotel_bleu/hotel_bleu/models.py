@@ -1,5 +1,7 @@
+
 from django.db import models
 from django.contrib.auth.models import User
+
 
 ROOM_STATUS = (
   ('R', 'Ready'),
@@ -15,28 +17,31 @@ RESERVATION_STATUS = (
   )
 
 
+class Guest(User):
+    pass
+
+
 class Hotel(models.Model):
-    address = models.CharField(max_length=200)
+    name = models.CharField(max_length=127)
+    address = models.CharField(max_length=255)
 
 
 class Room(models.Model):
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     size = models.PositiveSmallIntegerField()
-    etage = models.SmallIntegerField()
-    label = models.CharField(max_length=50)
+    floor = models.SmallIntegerField()
+    label = models.CharField(max_length=63)
     status = models.CharField(max_length=1, choices=ROOM_STATUS)
     capacity = models.PositiveSmallIntegerField()
+
+    hotel = models.ForeignKey(Hotel, related_name='rooms', on_delete=models.CASCADE)
 
 
 class Reservation(models.Model):
     begin = models.DateTimeField()
     end = models.DateTimeField()
     paid = models.BooleanField(default=False)
-    room = models.ForeignKey(Room, related_name='reservations', related_query_name='reservation', on_delete=models.PROTECT)
     status = models.CharField(max_length=1, choices=RESERVATION_STATUS)
-    receipt = models.FilePathField(path='/home/pluto/tmp', recursive=True, max_length=250)
+    receipt = models.FilePathField(path='/home/pluto/tmp/receipts', recursive=True, max_length=255)
 
-
-class Guest(User):
-    models.ManyToManyField(Reservation, related_name='guests', related_query_name='guest')
-    pass
+    rooms = models.ManyToManyField(Room, related_name='reservations', related_query_name='reservations')
+    guests = models.ManyToManyField(Guest, related_name='reservations', related_query_name='reservations')
