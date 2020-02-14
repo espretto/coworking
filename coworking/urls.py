@@ -1,4 +1,4 @@
-"""hotel_bleu URL Configuration
+"""coworking URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -17,18 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from .hotel_bleu import views
+from .coworking import __version__, views
 
 
 router = routers.DefaultRouter()
-router.register(r'guests', views.GuestViewSet)
-router.register(r'hotels', views.HotelViewSet)
-router.register(r'rooms', views.RoomViewSet)
-router.register(r'reservations', views.ReservationViewSet)
+router.register(r'client', views.ClientViewSet)
+router.register(r'workspace', views.WorkspaceViewSet)
+router.register(r'office', views.OfficeViewSet)
+router.register(r'reservation', views.ReservationViewSet)
 
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls'))
+    path('admin/', admin.site.urls),
+    path('api/{}/'.format(__version__), include(router.urls)),
+    path('api/{}/auth/'.format(__version__), include('rest_framework.urls'))
 ]

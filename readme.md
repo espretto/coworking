@@ -1,4 +1,4 @@
-# Hôtel Bleu
+# Co-working Space
 
 This is a showcase project to bring together a number of different technologies in a hexagonal architecture.
 
