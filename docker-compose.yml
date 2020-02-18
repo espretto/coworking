@@ -1,0 +1,13 @@
+version: '2.0'
+
+volumes:
+  coworking_data: {}
+
+services:
+  postgres:
+    image: postgres:10-alpine
+    ports:
+      - '5432:5432'
+    volumes:
+      - coworking_data:/var/lib/postgresql/data
+    env_file: .env

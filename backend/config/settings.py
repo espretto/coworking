@@ -20,13 +20,14 @@ BASE_DIR = pathlib.Path(__file__).parent.parent
 
 # load operating system environment variables and then prepare to use them
 env = environ.Env()
+environ.Env.read_env((BASE_DIR.parent / '.env').open('rt'))
 
 # Quick-start development settings - unsuitable for production
 
 # SECURITY WARNING: keep the secret key used in production secret!
-DEBUG = True # env.bool('DEBUG')
-# DOMAIN = env.str('DOMAIN')
-SECRET_KEY = "ee3a3de1-7dad-42f4-8158-2aa61dd83ab6" # env.str('SECRET_KEY')
+DEBUG = env.bool('DEBUG')
+DOMAIN = env.str('DOMAIN')
+SECRET_KEY = env.str('SECRET_KEY')
 
 ALLOWED_HOSTS = ['*'] # env.list('ALLOWED_HOSTS', default=['*'])
 
@@ -79,6 +80,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env.str('POSTGRES_DB'),
+        'USER': env.str('POSTGRES_USER'),
+        'PASSWORD': env.str('POSTGRES_PASSWORD'),
+        'HOST': '127.0.0.1',
+        'PORT': 5432
+    },
+    'local': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
