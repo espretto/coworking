@@ -9,6 +9,7 @@ verify_ssl = true
 djangorestframework = "*"
 django = "*"
 django-filter = "*"
+django-environ = "*"
 
 [requires]
-python_version = "3.5"
+python_version = "3.6"

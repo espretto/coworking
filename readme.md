@@ -41,3 +41,6 @@ This is a showcase project to bring together a number of different technologies 
 
 ## Resources
 - task queue: https://adamj.eu/tech/2020/02/03/common-celery-issues-on-django-projects/
+
+## Notes
+Geographic centre: 47.21627/-1.54936
