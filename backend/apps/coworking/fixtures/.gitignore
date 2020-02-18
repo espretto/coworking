@@ -1,0 +1,3 @@
+
+# ignore uncompressed json fixtures
+*.json
