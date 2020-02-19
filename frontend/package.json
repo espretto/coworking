@@ -9,7 +9,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "leaflet": "^1.6.0",
+    "purecss": "^1.0.1",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5"
   },

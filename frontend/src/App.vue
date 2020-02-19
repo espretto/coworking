@@ -9,6 +9,14 @@
 </template>
 
 <style lang="scss">
+@import "leaflet";
+
+.leaflet-default-icon-path,
+.leaflet-control-layers-toggle,
+.leaflet-retina .leaflet-control-layers-toggle {
+  background-image: none
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
