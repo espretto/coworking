@@ -23,6 +23,8 @@
 import axios from 'axios'
 import L from 'leaflet'
 
+L.Icon.Default.prototype.options.imagePath = '/leaflet/'
+
 export default {
   name: 'schedule',
 
@@ -38,7 +40,12 @@ export default {
 
   watch: {
     workspaces (workspaces) {
-
+      this.$map.eachLayer(layer => {
+        if (layer instanceof L.Marker) layer.remove()
+      })
+      workspaces.forEach(({ latitude, longitude }) => {
+        this.$map.addLayer(L.marker([latitude, longitude], { riseOnHover: true }))
+      })
     }
   },
 
@@ -53,6 +60,7 @@ export default {
   },
 
   beforeDestroy () {
+    this.$map.clearLayers()
     this.$map.remove()
   }
 }
