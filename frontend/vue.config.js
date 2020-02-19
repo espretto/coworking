@@ -15,12 +15,5 @@ module.exports = {
         target: 'http://localhost:8000'
       }
     }
-  },
-  css: {
-    loaderOptions: {
-      css: {
-        url: false
-      }
-    }
   }
 }

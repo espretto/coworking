@@ -9,7 +9,7 @@
 </template>
 
 <style lang="scss">
-@import "leaflet";
+@import "~leaflet/dist/leaflet.css";
 
 .leaflet-default-icon-path,
 .leaflet-control-layers-toggle,
