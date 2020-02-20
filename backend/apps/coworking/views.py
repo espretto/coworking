@@ -74,5 +74,4 @@ class ReservationListView(generics.ListAPIView):
                 raise exceptions.ValidationError("workspace id has to be an integer")
             lookup_params['office__workspace_id__exact'] = int(workspace_id)
 
-
         return Reservation.objects.filter(**lookup_params)
