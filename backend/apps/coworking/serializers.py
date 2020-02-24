@@ -17,7 +17,7 @@ class WorkspaceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Workspace
-        fields = ['name', 'address', 'latitude', 'longitude', 'offices']
+        fields = ['id', 'name', 'address', 'latitude', 'longitude', 'offices']
 
 
 class OfficeSerializer(serializers.ModelSerializer):

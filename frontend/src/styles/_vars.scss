@@ -1,0 +1,13 @@
+
+/** color theme */
+$theme1: #071310;
+$theme2: lighten($theme1, 15%);
+$theme3: lighten($theme1, 30%);
+$theme4: lighten($theme1, 45%);
+$theme5: lighten($theme1, 60%);
+$theme6: lighten($theme1, 75%);
+
+$highlight5: adjust-hue($theme5, 190);
+
+/** dimensions */
+$app-width: 1140px;
