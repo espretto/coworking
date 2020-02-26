@@ -15,13 +15,14 @@
           <td>{{index + 1}}</td>
           <td>{{workspace.name}}</td>
           <td>{{workspace.address}}</td>
-          <td><router-link :to="'/workspaces/' + workspace.id">manage</router-link></td>
+          <td><router-link :to="{ name: 'workspace', params: { id: workspace.id }}">manage</router-link></td>
         </tr>
       </table>
     </div>
     <div class="pure-u-1-2">
       <div class="ws-map" ref="map"></div>
     </div>
+    <hr class="pure-u-1"/>
   </div>
 </template>
 
@@ -32,12 +33,13 @@
   .ws-tbl {
     width: 95%;
 
-    tr.selected td { background: $highlight5 }
+    tr.selected td {
+      background: $highlight6;
+    }
 
     td {
-      cursor: pointer;
       font-size: 12px;
-      padding: (16/12)*0.5em (16/12)*1em;
+      padding: 0.5rem 1rem;
     }
 
     th {
@@ -55,11 +57,18 @@
     }
   }
 
+  .ws-tbl-marker {
+    display: inline-block;
+    height: 1em;
+    width: auto;
+  }
+
   .ws-map {
     border: 1px dashed $theme1;
     display: block;
     width: 100%;
     height: 100%;
+    min-height: 480px
   }
 </style>  
 
@@ -67,6 +76,7 @@
 
 import L from 'leaflet'
 import axios from 'axios'
+import router from '../router'
 import { leafletOptions } from '../config'
 
 /** @type {L.Icon} default marker */
@@ -74,7 +84,8 @@ const defaultIcon = new L.Icon.Default()
 /** @type {L.Icon} highlighted/selected marker */
 const selectedIcon = new (L.Icon.Default.extend({
   options: {
-    iconUrl: 'marker-icon-selected.png'
+    iconUrl: 'marker-icon-selected.png',
+    iconRetinaUrl: 'marker-icon-selected.png'
   }
 }))
 
@@ -113,13 +124,17 @@ export default {
 
   watch: {
     workspaces (workspaces) {
+      // clear previous markers
       this.$markers.forEach(m => m.remove())
-      this.$markers = workspaces.map(({ latitude, longitude }, index) =>
+      // create one marker per workspace
+      this.$markers = workspaces.map(({ id, latitude, longitude }, index) =>
         L.marker([latitude, longitude])
           .on('mouseover', () => this.selectedWorkspaceIndex = index)
+          .on('click', () => router.push({ name: 'workspace', params: { id }}))
           .addTo(this.$map)
       )
     },
+    
     selectedWorkspaceIndex (newIndex, oldIndex) {
       if (oldIndex > -1) this.$markers[oldIndex].setIcon(defaultIcon)
       this.$markers[newIndex].setIcon(selectedIcon)

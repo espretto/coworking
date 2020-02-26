@@ -1,5 +1,50 @@
 
+@import "./vars";
+
+/* -----------------------------------------------------------------------------
+ * global overrides
+ */
 ::-moz-focus-inner { border: 0; }
 :focus { outline: none; }
 * { box-sizing: border-box }
 
+/* -----------------------------------------------------------------------------
+ * global standards
+ */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-weight: normal;
+  line-height: 2em;
+  border-bottom: 1px double #bbb;
+}
+
+hr {
+  margin-top: 3em;
+  border: none;
+  border-bottom: 1px double #bbb;
+  box-shadow: 0 1px 2px 1px #eee;
+}
+
+/* -----------------------------------------------------------------------------
+ * purecss overrides
+ */
+.pure-table {
+  font-size: 12px;
+
+  td {
+    padding: 0.5rem 1rem;
+  }
+
+  th {
+    text-align: left;
+    background: $theme3;
+    color: #eee;
+    font-weight: 500;
+    font-variant: small-caps;
+    text-transform: lowercase;
+  }
+}

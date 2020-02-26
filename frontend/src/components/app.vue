@@ -13,10 +13,12 @@
   @import '../styles/vars';
 
   .content {
+    font-size: 12px;
+    font-family: Helvetica;
+
     width: $app-width;
     margin: 3em auto;
     padding: 1.5em 24px;
-
   }
 </style>
 

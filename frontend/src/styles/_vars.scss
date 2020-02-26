@@ -7,7 +7,8 @@ $theme4: lighten($theme1, 45%);
 $theme5: lighten($theme1, 60%);
 $theme6: lighten($theme1, 75%);
 
-$highlight5: adjust-hue($theme5, 190);
+$highlight3: adjust-hue($theme3, 200);
+$highlight6: adjust-hue($theme6, 200);
 
 /** dimensions */
 $app-width: 1140px;
