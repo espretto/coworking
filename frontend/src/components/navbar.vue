@@ -2,7 +2,7 @@
   <div class="bar">
     <nav class="nav">
       <ul class="nav-links">
-        <li><router-link to="/"><span class="nav-link-home">coworking</span></router-link></li>
+        <li><span class="nav-link-home">coworking</span></li>
         <li><router-link to="/workspaces">workspaces</router-link></li>
         <li><router-link to="/about">about</router-link></li>
       </ul>
@@ -15,7 +15,7 @@
   $nav-height: 3em;
 
   .bar {
-    position: fixed;
+    position: sticky;
     z-index: 1001; // above .leaflet-top
     display: block;
     top: 0;
@@ -43,7 +43,7 @@
       height: 100%; 
     }
 
-    a {
+    .nav-link-home, a {
       display: inline-block;
       height: 100%; 
       line-height: $nav-height;

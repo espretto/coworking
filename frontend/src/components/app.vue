@@ -17,7 +17,7 @@
     font-family: Helvetica;
 
     width: $app-width;
-    margin: 3em auto;
+    margin: 1em auto;
     padding: 1.5em 24px;
   }
 </style>
