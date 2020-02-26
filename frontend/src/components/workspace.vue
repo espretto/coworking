@@ -1,7 +1,14 @@
 <template>
   <div class="pure-g">
     <div class="schedule-header pure-u-1-1">
-      <h2>Worspace: {{workspace.name}} <small>Address: {{workspace.address}} &#8226; Location: <a target="_blank" :href="`https://www.openstreetmap.org/#map=12/${workspace.latitude}/${workspace.longitude}`">{{workspace.latitude}}, {{workspace.longitude}}</a></small></h2>
+      <h2>Worspace: {{workspace.name}}
+        <small>
+          Address: {{workspace.address}} &#8226;
+          Location: <a target="_blank" :href="`https://www.openstreetmap.org/#map=12/${workspace.latitude}/${workspace.longitude}`">
+            {{workspace.latitude}}, {{workspace.longitude}}
+          </a>
+        </small>
+      </h2>
     </div>
     <div class="schedule-nav pure-u-1-1">
       <form class="pure-form" action="javascript:void(0);">
@@ -11,6 +18,22 @@
     </div>
     <div class="schedule-container pure-u-1-1">
       <div class="schedule">
+        
+        <div class="schedule-timescale">
+          <div class="schedule-corner">Office</div>
+          <div class="schedule-day-head"
+               v-for="date in weekdates">
+            
+            <div class="date">{{formatDateOfWeek(week, date)}}</div>
+            <div class="hours">
+              <span class="hour">9H</span>
+              <span class="hour">12H</span>
+              <span class="hour">15H</span>
+              <span class="hour">18H</span>
+            </div>
+          </div>
+        </div>
+
         <div class="schedule-week"
              v-for="office in offices"
              :style="{ height: (reservations[office.id] || nullReservations).maxPerDay * 16 + 'px' }">
@@ -21,7 +44,7 @@
           </div>
           
           <div class="schedule-day"
-               v-for="date in weekDates">
+               v-for="date in weekdates">
             
             <div class="reservation"
                  v-for="(reservation, index) in ((reservations[office.id] || nullReservations).reservations[date] || [])"
@@ -40,7 +63,9 @@
   $px-per-hour: 32px;
   $hours-per-day: 9;
   $hours-per-week: $hours-per-day * 5;
+  $day-head-height: 32px;
   $week-head-width: 144px;
+  $schedule-width: $px-per-hour * $hours-per-week + $week-head-width;
 
   [class*=" pure-u"] {
     margin-top: 1.5em;
@@ -72,14 +97,67 @@
     flex-direction: column;
   }
 
+  .schedule-timescale {
+    position: sticky;
+    z-index: 15;
+    top: 0;
+    width: $schedule-width;
+    height: $day-head-height;
+    display: flex;
+    flex-direction: row;
+
+    background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M8 0 V8 8 H0 8' stroke='%23999' stroke-width='1' fill='none'/%3E%3C/svg%3E") 0 0 repeat-x;
+    background-position: left bottom;
+  }
+
+  .schedule-corner {
+    position: sticky;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    width: $week-head-width;
+    height: $day-head-height;
+    background: #fff;
+    padding: .5em 1em;
+    border: 1px solid #aaa;
+    border-top: none;
+  }
+
+  .schedule-day-head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: $px-per-hour*9;
+    height: $day-head-height;
+    border-right: 1px solid #aaa;
+
+    .date {
+      display: block;
+      text-align: center;
+    }
+
+    .hours {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: .2em;
+    }
+    
+    .hour {
+      color: #999;
+      background: #fff
+    }
+  }
+
   .schedule-week {
     display: flex;
     flex-direction: row;
-    width: $px-per-hour * $hours-per-week + $week-head-width;
+    width: $schedule-width;
     // height: see template;
 
     // thx: https://yoksel.github.io/url-encoder/;
-    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='16'%3E%3Cpath d='M0 16 V0 0 H8 0' stroke='%23ccc' stroke-width='1' fill='none'/%3E%3C/svg%3E") 0 0 repeat;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='16'%3E%3Cpath d='M8 0 V8 16 H0 8' stroke='%23ccc' stroke-width='1' fill='none'/%3E%3C/svg%3E") 0 0 repeat;
     
     &:nth-child(2n) {
       background-color: #eee;
@@ -115,7 +193,7 @@
     display: inline-block;
     width: $px-per-hour*9;
     height: 100%;
-    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
   }
 
   .reservation {
@@ -192,7 +270,7 @@ export default {
   },
 
   computed: {
-    weekDates () {
+    weekdates () {
       // TODO explicitely choose monday as first day of week (locale)
       const m = moment().week(this.week).startOf('week')
       return range(5).map(d => m.add(1, 'days').date())
@@ -240,12 +318,17 @@ export default {
     reservationStyles (r, index) {
       return mapValues({
         // order is governed by `sortReservations`
-        top: index * 16 + 2,
+        top: index * 16 + 1,
         // offices open at nine o'clock
         left: (timeToHours(r.begin) - 9) * PX_PER_HOUR,
         // bar length depends duration
         width: millisToHours(duration(r)) * PX_PER_HOUR
       }, px)
+    },
+
+    /** pure function to format date in week */
+    formatDateOfWeek (week, date) {
+      return moment().week(week).date(date).format('dddd, Do MMM')
     }
   }
 }  
