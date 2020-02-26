@@ -16,7 +16,7 @@
              :style="{ height: (reservations[office.id] || nullReservations).maxPerDay * 16 + 'px' }">
           
           <div class="schedule-week-head">
-            {{office.label}}<br>
+            <span class="office-label">{{office.label}}</span>
             ({{office.capacity}} desks on {{office.size}}m<sup>2</sup>)
           </div>
           
@@ -40,7 +40,7 @@
   $px-per-hour: 32px;
   $hours-per-day: 9;
   $hours-per-week: $hours-per-day * 5;
-  $week-head-width: 140px;
+  $week-head-width: 144px;
 
   [class*=" pure-u"] {
     margin-top: 1.5em;
@@ -78,8 +78,14 @@
     width: $px-per-hour * $hours-per-week + $week-head-width;
     // height: see template;
 
-    &:nth-child(2n+1) {
-      background: #eee;
+    // thx: https://yoksel.github.io/url-encoder/;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='16'%3E%3Cpath d='M0 16 V0 0 H8 0' stroke='%23ccc' stroke-width='1' fill='none'/%3E%3C/svg%3E") 0 0 repeat;
+    
+    &:nth-child(2n) {
+      background-color: #eee;
+      & .schedule-week-head {
+        background-color: #eee;
+      }
     }
   }
 
@@ -90,8 +96,18 @@
     width: $week-head-width;
     height: 100%;
     padding: .5em 1em;
-    box-sizing: border-box;
-    background: #eee;
+    background: #fff;
+    &:nth-child(2n) {
+      background: #eee;
+    }
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+  }
+
+  .office-label {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .schedule-day {
@@ -99,14 +115,15 @@
     display: inline-block;
     width: $px-per-hour*9;
     height: 100%;
+    border-left: 1px solid #aaa;
   }
 
   .reservation {
     position: absolute;
-    height: 15px;
+    height: 13px;
     border-top: 1px solid #666;
     border-left: 1px solid #666;
-    border-radius: 2px;
+    border-radius: 3px;
     background: $theme3;
   }
 </style>
@@ -215,7 +232,7 @@ export default {
     reservationStyles (r, index) {
       return mapValues({
         // order is governed by `sortReservations`
-        top: index * 16,
+        top: index * 16 + 2,
         // offices open at nine o'clock
         left: (timeToHours(r.begin) - 9) * PX_PER_HOUR,
         // bar length depends duration
