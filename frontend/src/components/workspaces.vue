@@ -1,7 +1,9 @@
 <template>
   <div class="pure-g">
-    <div class="pure-u-1-2">
-      <table class="ws-tbl pure-table pure-table-horizontal pure-table-striped">
+    <div class="ws-table-container pure-u-1-2">
+      <h2>Introduction</h2>
+      <p>This application allows to manage different workspaces across the town. Every <span class="nowrap">co-working space</span> has a number of offices, each with a limited number of desks. Clients may reserve a free desk during the office hours from 9H&ndash;18H.</p>
+      <table class="ws-table pure-table pure-table-horizontal pure-table-striped">
         <tr>
           <th>#</th>
           <th>Workspace</th>
@@ -15,11 +17,11 @@
           <td>{{index + 1}}</td>
           <td>{{workspace.name}}</td>
           <td>{{workspace.address}}</td>
-          <td><router-link :to="{ name: 'workspace', params: { id: workspace.id }}">manage</router-link></td>
+          <td><router-link :to="{ name: 'workspace', params: { id: workspace.id }}">inspect</router-link></td>
         </tr>
       </table>
     </div>
-    <div class="pure-u-1-2">
+    <div class="map-container pure-u-1-2">
       <div class="ws-map" ref="map"></div>
     </div>
     <hr class="pure-u-1"/>
@@ -30,11 +32,23 @@
   @import "~leaflet/dist/leaflet.css";
   @import "../styles/vars";
 
-  .ws-tbl {
-    width: 95%;
+  [class*=" pure-u"] {
+    margin-top: 1em;
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  .ws-table-container {
+    padding-right: 2em;
+  }
+
+  .ws-table {
+    width: 100%;
 
     tr.selected td {
-      background: $highlight6;
+      background: $theme6;
     }
 
     td {
@@ -55,12 +69,6 @@
     td:nth-child(1) {
       text-align: right;
     }
-  }
-
-  .ws-tbl-marker {
-    display: inline-block;
-    height: 1em;
-    width: auto;
   }
 
   .ws-map {

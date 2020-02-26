@@ -11,10 +11,7 @@
       </h2>
     </div>
     <div class="schedule-nav pure-u-1-1">
-      <form class="pure-form" action="javascript:void(0);">
-        <label for="week">Week of Year</label>
-        <input id="week" type="number" min="1" max="52" v-model="week"/>
-      </form>
+      <p>This view shows the workspace's offices and its reservations for week <input id="week" type="number" min="1" max="52" v-model="week"/> of the current year. The number of reservations is limited by the number of desks available. The reservations are sorted chronologically in order to spot congestions easier and find remaining space, well time actually.</p>
     </div>
     <div class="schedule-container pure-u-1-1">
       <div class="schedule">
@@ -68,11 +65,13 @@
   $schedule-width: $px-per-hour * $hours-per-week + $week-head-width;
 
   [class*=" pure-u"] {
-    margin-top: 1.5em;
+    margin-top: 1em;
   }
 
   .schedule-header {
     h2 > small {
+      font-size: 14px;
+      margin-bottom: -.2em;
       float: right;
     }
   }

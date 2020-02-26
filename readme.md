@@ -5,18 +5,19 @@ This is a showcase project to bring together a number of different technologies 
 ## Roadmap
 
 - [ ] develop application features
-  - [ ] represent hotel rooms, reservations and guests
-  - [ ] design and implement a rest-api for them
-  - [ ] connect to kafka message broker
+  - [x] represent offices, reservations and clients
+  - [x] design and implement a rest-api for them
+  - [ ] connect to kafka/rabbitmq message broker
   - [ ] offload pdf bill generation to worker queue
   - [ ] mount document storage for authenticated uploads
 - [ ] frontend views
-  - [ ] home page presenting the project
+  - [x] about page presenting the project
   - [ ] registration and authentication functionality
-  - [ ] overview: tabular calendar for room reservations
-  - [ ] detailed view: reservation, room
+  - [x] map view with markers for local workspaces
+  - [x] overview: tabular calendar for office/desk reservations
+  - [ ] detailed view: reservation, office
 - [ ] setup CI to automate the following tasks
-  - [ ] linting flake8
+  - [x] linting flake8
   - [ ] quality control with [lumnify](https://lumnify.com/)
   - [ ] unit/integration tests
   - [ ] test coverage reports
@@ -27,8 +28,8 @@ This is a showcase project to bring together a number of different technologies 
     - [ ] reverse-proxy for api-calls
     - [ ] serve static files for client interface
     - [ ] serve file uploads and authenticate using [nginx auth module](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html)
-  - [ ] postgresql database
-    - [ ] generate fixtures with [mockaroo](https://mockaroo.com/)
+  - [x] postgresql database
+    - [x] generate fixtures with [mockaroo](https://mockaroo.com/)
     - [ ] create indices where necessary
     - [ ] duplicate the instance setup log-sharing
   - [ ] message/task broker
