@@ -25,7 +25,7 @@ class OfficeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Office
-        fields = ['label', 'size', 'capacity', 'workspace', 'reservations']
+        fields = ['id', 'label', 'size', 'capacity', 'workspace', 'reservations']
 
 
 class ReservationSerializer(serializers.ModelSerializer):

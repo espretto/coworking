@@ -29,6 +29,26 @@ class OfficeViewSet(viewsets.ModelViewSet):
     serializer_class = OfficeSerializer
 
 
+class OfficeListView(generics.ListAPIView):
+    serializer_class = OfficeSerializer
+
+    def get_queryset(self):
+        """
+        optionnally filters the results by workspace
+        """
+        q = self.request.query_params
+        workspace_id = q.get('workspace', None)
+
+        lookup_params = dict()
+
+        if workspace_id:
+            if not workspace_id.isdigit():
+                raise exceptions.ValidationError("workspace id has to be an integer")
+            lookup_params['workspace_id__exact'] = int(workspace_id)
+
+        return Office.objects.filter(**lookup_params)
+
+
 class ReservationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows guests to be viewed or edited.
@@ -42,8 +62,8 @@ class ReservationListView(generics.ListAPIView):
 
     def get_queryset(self):
         """
-        Optionally restricts the returned purchases to a given user,
-        by filtering against a `username` query parameter in the URL.
+        optionally restricts the returned reservations to a given
+        week, office, client or workspace
         """
         q = self.request.query_params
         week = q.get('week', None)

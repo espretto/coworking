@@ -38,6 +38,9 @@ This is a showcase project to bring together a number of different technologies 
 - [ ] make the number of workers adapt to the number of tasks
 - [ ] test behaviour of component outage
 
+## Issues
+
+- [ ] do not expose object ids but, use slugs where available
 
 ## Resources
 - task queue: https://adamj.eu/tech/2020/02/03/common-celery-issues-on-django-projects/
