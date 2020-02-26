@@ -21,10 +21,10 @@
           </div>
           
           <div class="schedule-day"
-               v-for="(perDay, day) in (reservations[office.id] || nullReservations).reservations">
+               v-for="date in weekDates">
             
             <div class="reservation"
-                 v-for="(reservation, index) in perDay"
+                 v-for="(reservation, index) in ((reservations[office.id] || nullReservations).reservations[date] || [])"
                  :style="reservationStyles(reservation, index)">
             </div>
           </div>
@@ -132,7 +132,7 @@
 
 import axios from 'axios'
 import moment from 'moment'
-import { groupBy, sortBy, partial, reduce, mapValues } from 'lodash'
+import { groupBy, sortBy, partial, reduce, mapValues, range } from 'lodash'
 import { apiVersion } from '../config'
 
 /**
@@ -188,6 +188,14 @@ export default {
         maxPerDay: 3,
         reservations: []
       }
+    }
+  },
+
+  computed: {
+    weekDates () {
+      // TODO explicitely choose monday as first day of week (locale)
+      const m = moment().week(this.week).startOf('week')
+      return range(5).map(d => m.add(1, 'days').date())
     }
   },
 
