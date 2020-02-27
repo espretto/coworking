@@ -30,7 +30,7 @@ services:
   nginx:
     image: nginx:alpine
     ports:
-      - "8000:80"
+      - "80:80"
     volumes:
       - ./frontend/dist/:/public/
       - ./nginx/production.conf:/etc/nginx/nginx.conf:ro
