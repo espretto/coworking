@@ -11,6 +11,8 @@ django = "*"
 django-filter = "*"
 django-environ = "*"
 psycopg2-binary = "*"
+gunicorn = "*"
+gevent = "*"
 
 [requires]
 python_version = "3.6"
