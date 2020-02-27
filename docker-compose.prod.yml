@@ -19,7 +19,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - '5000:5000'
+      - '5678:5678'
     volumes:
       - ./backend:/backend
     entrypoint: ./scripts/entrypoint.sh
