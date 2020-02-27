@@ -11,3 +11,18 @@ services:
     volumes:
       - coworking_data:/var/lib/postgresql/data
     env_file: .env
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./backend:/backend
+    entrypoint: ./scripts/entrypoint.sh
+    command: ./scripts/gunicorn.sh
+    restart: on-failure
+    env_file: .env
