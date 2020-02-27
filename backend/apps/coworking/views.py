@@ -5,28 +5,12 @@ from .models import Client, Workspace, Office, Reservation
 from .serializers import ClientSerializer, WorkspaceSerializer, OfficeSerializer, ReservationSerializer
 
 
-class ClientViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows guests to be viewed or edited.
-    """
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
-
-
-class WorkspaceViewSet(viewsets.ModelViewSet):
+class WorkspaceListView(generics.ListAPIView):
     """
     API endpoint that allows guests to be viewed or edited.
     """
     queryset = Workspace.objects.all()
     serializer_class = WorkspaceSerializer
-
-
-class OfficeViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows guests to be viewed or edited.
-    """
-    queryset = Office.objects.all()
-    serializer_class = OfficeSerializer
 
 
 class OfficeListView(generics.ListAPIView):
@@ -47,14 +31,6 @@ class OfficeListView(generics.ListAPIView):
             lookup_params['workspace_id__exact'] = int(workspace_id)
 
         return Office.objects.filter(**lookup_params)
-
-
-class ReservationViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows guests to be viewed or edited.
-    """
-    queryset = Reservation.objects.all()
-    serializer_class = ReservationSerializer
 
 
 class ReservationListView(generics.ListAPIView):
