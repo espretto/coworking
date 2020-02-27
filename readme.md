@@ -26,7 +26,7 @@ Django, DRF (RESTful API), VueJS, Leaflet, Postgres, Nginx, Gunicorn, Docker
   - [ ] performance regression tests
 - [ ] dockerize the following containers
   - [x] production server for django application
-  - [ ] nginx front server
+  - [x] nginx front server
     - [x] reverse-proxy for api-calls
     - [x] serve static files for client interface
     - [ ] serve file uploads and authenticate using [nginx auth module](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html)
