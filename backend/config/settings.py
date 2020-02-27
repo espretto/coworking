@@ -18,18 +18,17 @@ import pathlib
 # build paths inside the project like this: str(BASE_DIR / 'path-segment')
 BASE_DIR = pathlib.Path(__file__).parent.parent
 
-# load operating system environment variables and then prepare to use them
+# production environment is loaded by docker-compose
 env = environ.Env()
-environ.Env.read_env((BASE_DIR.parent / '.env').open('rt'))
 
-# Quick-start development settings - unsuitable for production
+if env.bool('DEBUG', True):
+    environ.Env.read_env((BASE_DIR.parent / '.env').open('rt'))
 
-# SECURITY WARNING: keep the secret key used in production secret!
+
 DEBUG = env.bool('DEBUG')
 DOMAIN = env.str('DOMAIN')
 SECRET_KEY = env.str('SECRET_KEY')
-
-ALLOWED_HOSTS = ['*']  # env.list('ALLOWED_HOSTS', default=['*'])
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
