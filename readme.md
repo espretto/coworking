@@ -23,10 +23,10 @@ This is a showcase project to bring together a number of different technologies 
   - [ ] test coverage reports
   - [ ] performance regression tests
 - [ ] dockerize the following containers
-  - [ ] production server for django application
+  - [x] production server for django application
   - [ ] nginx front server
-    - [ ] reverse-proxy for api-calls
-    - [ ] serve static files for client interface
+    - [x] reverse-proxy for api-calls
+    - [x] serve static files for client interface
     - [ ] serve file uploads and authenticate using [nginx auth module](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html)
   - [x] postgresql database
     - [x] generate fixtures with [mockaroo](https://mockaroo.com/)

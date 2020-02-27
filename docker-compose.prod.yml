@@ -1,0 +1,36 @@
+version: '2.0'
+
+volumes:
+  coworking_data: {}
+
+services:
+  postgres:
+    image: postgres:10-alpine
+    ports:
+      - '5432:5432'
+    volumes:
+      - coworking_data:/var/lib/postgresql/data
+    env_file: .env
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./backend:/backend
+    entrypoint: ./scripts/entrypoint.sh
+    command: ./scripts/gunicorn.sh
+    restart: on-failure
+    env_file: .env
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8000:80"
+    volumes:
+      - ./frontend/dist/:/public/
+      - ./nginx/production.conf:/etc/nginx/nginx.conf:ro
