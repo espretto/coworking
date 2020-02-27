@@ -5,9 +5,17 @@ from .models import Client, Workspace, Office, Reservation
 from .serializers import ClientSerializer, WorkspaceSerializer, OfficeSerializer, ReservationSerializer
 
 
+class WorkspaceView(generics.RetrieveAPIView):
+    """
+    api endpoint exposing a list of workspaces
+    """
+    queryset = Workspace.objects.all()
+    serializer_class = WorkspaceSerializer
+
+
 class WorkspaceListView(generics.ListAPIView):
     """
-    API endpoint that allows guests to be viewed or edited.
+    api endpoint exposing a list of workspaces
     """
     queryset = Workspace.objects.all()
     serializer_class = WorkspaceSerializer

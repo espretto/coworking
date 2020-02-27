@@ -21,7 +21,8 @@ from apps.coworking import __version__, views
 
 
 urlpatterns = [
-    path('api/{}/workspaces'.format(__version__), views.WorkspaceListView.as_view()),
+    path('api/{}/workspaces/'.format(__version__), views.WorkspaceListView.as_view()),
+    path('api/{}/workspaces/<int:pk>/'.format(__version__), views.WorkspaceView.as_view()),
     path('api/{}/offices/'.format(__version__), views.OfficeListView.as_view()),
     path('api/{}/reservations/'.format(__version__), views.ReservationListView.as_view())
 ]
