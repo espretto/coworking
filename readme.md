@@ -1,19 +1,21 @@
 # Co-working Space
 
-This is a showcase project to bring together a number of different technologies in a hexagonal architecture.
+This is a showcase project to bring together a number of different technologies in a hexagonal architecture:
+
+Django, DRF (RESTful API), VueJS, Leaflet, Postgres, Nginx, Gunicorn, Docker
 
 ## Roadmap
 
 - [ ] develop application features
   - [x] represent offices, reservations and clients
-  - [x] design and implement a **RESTful API** for them
+  - [x] design and implement a RESTful API for them
   - [ ] connect to kafka/rabbitmq message broker
   - [ ] offload pdf bill generation to worker queue
   - [ ] mount document storage for authenticated uploads
-- [ ] frontend using **VueJS**
+- [ ] frontend using VueJS
   - [x] about page presenting the project
   - [ ] registration and authentication functionality
-  - [x] map view with **leaflet** for local workspaces
+  - [x] map view with leaflet for local workspaces
   - [x] overview: tabular calendar for office/desk reservations
   - [ ] detailed view: reservation, office
 - [ ] setup CI to automate the following tasks
@@ -22,13 +24,13 @@ This is a showcase project to bring together a number of different technologies 
   - [ ] unit/integration tests
   - [ ] test coverage reports
   - [ ] performance regression tests
-- [ ] **docker**ize the following containers
-  - [x] production server for **django** application
-  - [ ] **nginx** front server
+- [ ] dockerize the following containers
+  - [x] production server for django application
+  - [ ] nginx front server
     - [x] reverse-proxy for api-calls
     - [x] serve static files for client interface
     - [ ] serve file uploads and authenticate using [nginx auth module](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html)
-  - [x] **postgres**ql database
+  - [x] postgresql database
     - [x] generate fixtures with [mockaroo](https://mockaroo.com/)
     - [ ] create indices where necessary
     - [ ] duplicate the instance setup log-sharing
