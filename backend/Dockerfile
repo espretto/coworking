@@ -1,5 +1,5 @@
-# derive
-FROM python:3.6
+# derive: https://pythonspeed.com/articles/base-image-python-docker-images/
+FROM python:3.6-slim
 
 # position
 WORKDIR /backend
