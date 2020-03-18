@@ -6,22 +6,19 @@ from .serializers import ClientSerializer, WorkspaceSerializer, OfficeSerializer
 
 
 class WorkspaceView(generics.RetrieveAPIView):
-    """
-    api endpoint exposing a list of workspaces
-    """
+    """API endpoint exposing a list of workspaces"""
     queryset = Workspace.objects.all()
     serializer_class = WorkspaceSerializer
 
 
 class WorkspaceListView(generics.ListAPIView):
-    """
-    api endpoint exposing a list of workspaces
-    """
+    """API endpoint exposing a list of workspaces"""
     queryset = Workspace.objects.all()
     serializer_class = WorkspaceSerializer
 
 
 class OfficeListView(generics.ListAPIView):
+    """API endpoint exposing a list of offices"""
     serializer_class = OfficeSerializer
 
     def get_queryset(self):
@@ -42,6 +39,7 @@ class OfficeListView(generics.ListAPIView):
 
 
 class ReservationListView(generics.ListAPIView):
+    """API endpoint exposing a list of reservations"""
     serializer_class = ReservationSerializer
 
     def get_queryset(self):

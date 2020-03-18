@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 
 
 class Command(BaseCommand):
+    """
+    The `hash_passwords` command allows to encrypt plaintext passwords
+    already present in the database. This is useful after insertion of
+    dummy users with non-encrypted passwords.
+    """
     help = "DEV COMMAND: hash user passwords"
 
     def handle(self, *args, **options):

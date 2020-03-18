@@ -5,6 +5,7 @@ from .models import Client, Workspace, Office, Reservation
 
 
 class ClientSerializer(serializers.ModelSerializer):
+    """Client model serializer for json rendering"""
     reservations = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
@@ -13,6 +14,7 @@ class ClientSerializer(serializers.ModelSerializer):
 
 
 class WorkspaceSerializer(serializers.ModelSerializer):
+    """Workspace model serializer for json rendering"""
     offices = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
@@ -21,6 +23,7 @@ class WorkspaceSerializer(serializers.ModelSerializer):
 
 
 class OfficeSerializer(serializers.ModelSerializer):
+    """Office model serializer for json rendering"""
     reservations = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
@@ -29,6 +32,7 @@ class OfficeSerializer(serializers.ModelSerializer):
 
 
 class ReservationSerializer(serializers.ModelSerializer):
+    """Reservation model serializer for json rendering"""
     client = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
     office = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
 
