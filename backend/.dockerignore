@@ -1,0 +1,12 @@
+
+# ignore dev settings
+setup.cfg
+
+# python specific
+**/__pycache__
+
+# exclude everything except runtime code
+apps/*/tests.py
+apps/*/fixtures
+apps/*/management
+apps/*/migrations
