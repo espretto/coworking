@@ -1,19 +1,21 @@
 # Co-working Space
 
-This is a showcase project to bring together a number of different technologies in a hexagonal architecture.
+This is a showcase project to bring together a number of different technologies in a hexagonal architecture:
+
+Django, DRF (RESTful API), VueJS, Leaflet, Postgres, Nginx, Gunicorn, Docker
 
 ## Roadmap
 
 - [ ] develop application features
   - [x] represent offices, reservations and clients
-  - [x] design and implement a rest-api for them
+  - [x] design and implement a RESTful API for them
   - [ ] connect to kafka/rabbitmq message broker
   - [ ] offload pdf bill generation to worker queue
   - [ ] mount document storage for authenticated uploads
-- [ ] frontend views
+- [ ] frontend using VueJS
   - [x] about page presenting the project
   - [ ] registration and authentication functionality
-  - [x] map view with markers for local workspaces
+  - [x] map view with leaflet for local workspaces
   - [x] overview: tabular calendar for office/desk reservations
   - [ ] detailed view: reservation, office
 - [ ] setup CI to automate the following tasks
